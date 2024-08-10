@@ -15,6 +15,7 @@ let x, y;
 let velocityX = 0;
 let velocityY = 0;
 let damping = 0.8;     // Energy loss on bounce
+let circleColor; // color of the ball 
 
 // Trail array
 let trail = [];
@@ -24,6 +25,7 @@ let launched = false;
 
 function setup() {
   createCanvas(500, 500);
+  circleColor = color(255, 153, 153); 
 }
 
 function draw() {
@@ -60,13 +62,13 @@ function draw() {
     beginShape();
     for (let i = 0; i < trail.length; i++) {
       let alpha = map(i, 0, trail.length, 0, 255);
-      stroke(100, 100, 255, alpha);
+      stroke(red(circleColor), green(circleColor), blue(circleColor), alpha);
       vertex(trail[i].x, trail[i].y);
     }
     endShape();
     
     // Draw circle
-    fill(100, 100, 255);
+    fill(circleColor);
     noStroke();
     ellipse(x, y, circleRadius * 2);
     
