@@ -16,6 +16,8 @@ let velocityX = 0;
 let velocityY = 0;
 let damping = 0.8;     // Energy loss on bounce
 let circleColor; // color of the ball 
+let friction = 0.025;    // Friction if flat on ground
+
 
 // Trail array
 let trail = [];
@@ -47,6 +49,15 @@ function draw() {
     if (x - circleRadius < 0 || x + circleRadius > width) {
       velocityX *= -damping;
       x = constrain(x, circleRadius, width - circleRadius);
+    }
+
+    // Add friction when it's on the "ground"
+    if (y == height - circleRadius) {
+      if (velocityX > 0) {
+          velocityX -= friction;
+      } else if (velocityX < 0) {
+          velocityX += friction;
+      }
     }
     
     // Add current position to trail
